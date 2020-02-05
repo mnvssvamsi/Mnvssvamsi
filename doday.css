@@ -1,0 +1,19 @@
+#dodaycont{}                                 /* id  */
+.product{                                    
+	text-align: center;
+	width: 200px;
+	padding: 20px;
+	float: left;
+	height: 200px;
+      }
+.brand{
+	text-align: center;
+	padding: 5px;   
+      }
+.cat{
+	text-align: center;
+	padding: 5px;   }
+.price{
+	text-align: center;
+	padding: 5px;    }
+
