@@ -1,69 +1,34 @@
-import  React from 'react'
-import axios   from 'axios';
+const express = require('express');
+const router = express.Router();
+const Course =require("../../Models/Course")
 
-class Courses extends React.Component {
+router.get('/courses',
+ async (req, res) => {    
+    console.log(req.body)
+    Course.find((err, result) => {
+        console.log(result);
+        if (err) {
+          res.status(500).json({ message: err.message });
+        } else if (!result) {
+          res.status(404).json({ message: "Course is not found" });
+        } else {
+          res.status(200).json({ courses: result,});
+        }
+      });
+})
 
-  constructor(props) {
-    super(props);   
-    this.state = {      
-      courses: []
-    
-    }
-  }
-  componentDidMount() {
-        const url = "/api/courses";
-        axios.get('/api/courses')
-        .then(response=>{
-            // console.log(response.data) 
-            this.setState({"courses":response.data.courses})
+router.get("/courses/:provider",(req,res)=>{
+    // console.log(req.params.id);
+    Course.find({Provider:req.params.provider}, (err, result) => {
+        // console.log(result);
+        if (err) {
+          res.status(500).json({ message: err.message });
+        } else if (!result) {
+          res.status(404).json({ message: "Course is not found" });
+        } else {
+          res.status(200).json({ courses: result, });
+        }
         })
-        .catch(error=>{
-            console.log(error)
-        })
-      }
-  render() {
-      // console.log(this.state.courses)
-    return (
-      
-      <div >                           
-          <table>
-            <thead>              
-              <tr>
-                <td>Course Id</td>
-                <td>Course Name</td>
-                <td>Provider</td>
-                <td>Universities/Institutions</td>
-                <td>Parent Subject</td>
-                <td>Child Subject</td>
-                <td>Url</td>
-                <td>Next Session Date</td>
-                <td>Length</td>
-                <td>Video(Url)</td>
-            </tr>               
-          </thead>
-          <tbody > 
-                {
-                    this.state.courses.map(row =>(
-                        <tr>
-                            <td >{row["Course Id"]}</td>
-                            <td>{row["Course Name"]}</td>
-                            <td>{row["Provider"]}</td>
-                            <td>{row["Universities/Institutions"]}</td>
-                            <td>{row["Parent Subject"]}</td>
-                            <td>{row["Child Subject"]}</td>
-                            <td>{row["Url"]}</td>
-                            <td>{row["Next Session Date"]}</td>
-                            <td>{row["Length"]}</td>
-                            <td>{row["Video(Url)"]}</td>
-                        </tr>
-                    ))
-                }     
-          </tbody>
-          </table>                
-      </div>
-    )
-  }
-   
-}
+})
 
-export default Courses;
+module.exports = router;
