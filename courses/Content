@@ -1,0 +1,19 @@
+//Data base
+Given data is converted to json format and imported in Mongo database. 
+// Backend
+Then created Api file(courses.js) in Node.js  and connected the database.(localhost//6000)
+Connection can be found in default.json and db files. Respective Model is created in Models folder.
+//Testing
+Tested whether data is connected to node.js using postman with the help of route and it is successful
+// Frontend
+Frontend is done using React Library of JavaScript
+Then fetched the data to React js using axios library  and it can be found in courses.js file in components folder.
+The course.js component is connected to App.js folder and displayed .
+
+
+
+
+
+
+
+Frontend related files are uploaded in front end folder remaining are directly uploaded in courses folder.
