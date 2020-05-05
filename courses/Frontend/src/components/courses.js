@@ -15,14 +15,14 @@ class Courses extends React.Component {
     axios.get('/api/courses')
       .then(response => {
         // console.log(response.data) 
-        const limitedCourses = []
-        for (var i = 0; i < 100; i++) {
-          limitedCourses.push(response.data.courses[i])
-        }
-        this.setState({
-          courses: limitedCourses
-        })
-        // this.setState({"courses":response.data.courses})
+        // const limitedCourses = []
+        // for (var i = 0; i < 100; i++) {
+        //   limitedCourses.push(response.data.courses[i])
+        // }
+        // this.setState({
+        //   courses: limitedCourses
+        // })
+        this.setState({"courses":response.data.courses})
 
       })
       .catch(error => {
@@ -60,10 +60,7 @@ class Courses extends React.Component {
   }
   // Filtering
   FilterCourses = (courseMatch) => {
-    const FilterCoursesNew = this.state.courses.filter((course) => {
-      // if(course.Provider=== courseMatch ){
-      //       return course.Provider;            
-      // }   
+    const FilterCoursesNew = this.state.courses.filter((course) => { 
       return course.Provider === courseMatch;
     })
     this.setState({
